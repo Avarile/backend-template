@@ -35,7 +35,6 @@ export class RoleEntity extends BaseEntity {
   @Column({
     type: 'timestamp',
     nullable: true,
-    default: null,
     comment: 'null means never expired',
   })
   expires_at?: Date | null;

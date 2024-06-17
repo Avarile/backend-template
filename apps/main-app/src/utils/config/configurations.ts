@@ -60,4 +60,7 @@ export default () => ({
   // STRIPE_PRICE_ID_ITEM1: z.string(),
   // STRIPE_PRICE_ID_ITEM2: z.string(),
   // STRIPE_PRICE_ID_ITEM3: z.string(),
+  OPENAI_KEYS: {
+    OPENAI_API_KEY_1: process.env.OPENAI_API_KEY,
+  },
 });
