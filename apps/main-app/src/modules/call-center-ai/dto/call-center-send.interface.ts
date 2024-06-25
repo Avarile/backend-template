@@ -26,7 +26,7 @@ export interface ICallCenterSendCall {
   request_data?: object;
   tools: [object];
   dynamic_data?: [{ 'dynamic_data[i].response_data': [object] }];
-  start_time: string;
+  start_time?: string;
   voicemail_message?: string;
   voicemail_action?: object;
   retry?: object;

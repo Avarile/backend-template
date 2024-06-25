@@ -19,28 +19,32 @@ export class CallCenterController {
 
   @Post('send-call')
   async initCallAction(@Body() body: CallCenterSendCallDTO): Promise<any> {
-    this.logger.log('Initiating call');
-    let payload: ICallCenterSendCall;
+    try {
+      this.logger.log('Initiating call');
+      let payload: ICallCenterSendCall;
 
-    switch (body.intention) {
-      case CallCenterIntentionEnum.confirmation:
-        payload = {
-          ...sendCallTemplate.confirmation,
-          phone_number: body.phone_number,
-          first_sentence: `Hello Mr.${body.user_last_name}, this is a confirmation call from Aaron Sansoni Group, My name is Shuana, I am calling to confirm your position for next ${body.content.context} event, time of the event will be ${body.content.date}, May I confirm your attandence?.`,
-          // user_last_name: Doe, content: {context: 'Deal Mastery', date: 'June 1st at 10:00 AM'}, intention: 'confirmation'
-          tools: [confirmationTool],
-        };
-        break;
+      this.logger.log('Intention: ' + body.intention);
 
-      default:
-        break;
-    }
+      switch (body.intention) {
+        case CallCenterIntentionEnum.confirmation:
+          payload = {
+            ...sendCallTemplate.confirmation,
+            phone_number: body.phone_number,
+            first_sentence: `Hello Mr.${body.user_last_name}, this is a confirmation call from Aaron Sansoni Group, My name is Shuana, I am calling to confirm your position for next ${body.content.context} event, time of the event will be ${body.content.date}, May I confirm your attandence?.`,
+            // user_last_name: Doe, content: {context: 'Deal Mastery', date: 'June 1st at 10:00 AM'}, intention: 'confirmation'
+            tools: [confirmationTool],
+          };
+          break;
 
-    const response = await this.callCenterService.initCall(payload);
+        default:
+          break;
+      }
 
-    this.logger.log('Call initiated');
-    return response;
+      const response = await this.callCenterService.initCall(payload);
+
+      this.logger.log('Call initiated');
+      return response;
+    } catch (error) {}
   }
 
   @Post('get-call-analysis')

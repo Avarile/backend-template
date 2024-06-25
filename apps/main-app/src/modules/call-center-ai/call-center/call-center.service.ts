@@ -4,7 +4,6 @@ import axios, { Axios } from 'axios';
 import {
   ICallCenterSendCall,
   ICallListResponse,
-  ICallResponse,
   ICustomizedToolsDTO,
   IVectorStoreDTO,
 } from '../dto/call-center-send.interface';
@@ -27,14 +26,15 @@ export class CallCenterService {
     // init axios instance
     this.axiosInstance = axios.create({
       baseURL: 'https://api.bland.ai/v1/',
-      timeout: 5000,
+      timeout: 100000,
       headers: this.callCenterAPIconfig.headers,
       method: this.callCenterAPIconfig.method,
       data: {},
     });
   }
 
-  async initCall(payload: ICallCenterSendCall): Promise<ICallResponse> {
+  async initCall(payload: ICallCenterSendCall) {
+    console.log('payload', payload);
     const response = await this.axiosInstance.post('calls', payload);
 
     return response.data;
