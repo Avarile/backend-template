@@ -12,6 +12,13 @@ export class CustomService {
     last_name,
     password,
   }): Promise<any> {
+    const exist = await this.userService.verifyUserExistByEmail(email);
+    if (exist) {
+      return {
+        message: 'User already exist',
+      };
+    }
+
     this.logger.log('Creating user info');
 
     const new_user = await this.userService.createUser({

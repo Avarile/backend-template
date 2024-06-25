@@ -36,11 +36,23 @@ export class UsersRepository extends Repository<UsersEntity> {
     });
   }
 
-  async findByEmailOrThrow(email: string) {
+  async existUserByEmail(email: string): Promise<boolean> {
     const user = await this.findOne({
       where: {
         email,
       },
+    });
+
+    if (!user) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  async findByEmailOrThrow(email: string) {
+    const user = await this.findOne({
+      where: { email },
     });
 
     if (!user) {

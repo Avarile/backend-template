@@ -68,6 +68,10 @@ export class UserService {
     return await this.userRepo.findByEmailOrThrow(email);
   }
 
+  async verifyUserExistByEmail(email: string) {
+    return await this.userRepo.existUserByEmail(email);
+  }
+
   async getUserById(id: number) {
     return await this.userRepo.findByID(id);
   }
