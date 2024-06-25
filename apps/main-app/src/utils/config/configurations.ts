@@ -62,5 +62,7 @@ export default () => ({
   // STRIPE_PRICE_ID_ITEM3: z.string(),
   OPENAI_KEYS: {
     OPENAI_API_KEY_1: process.env.OPENAI_API_KEY,
+    BLAND_AI_API_KEY: process.env.BLAND_AI_API_KEY,
+    BLAND_AI_WEBHOOK_SECRET: process.env.BLAND_AI_WEBHOOK_SECRET,
   },
 });

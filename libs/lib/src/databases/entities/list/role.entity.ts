@@ -37,5 +37,5 @@ export class RoleEntity extends BaseEntity {
     nullable: true,
     comment: 'null means never expired',
   })
-  expires_at?: Date | null;
+  expires_at?: Date;
 }

@@ -1,6 +1,6 @@
 import {
+  Controller,
   // Body,
-  Injectable,
   Logger,
   // ParseFilePipeBuilder,
   Post,
@@ -32,9 +32,9 @@ const storageConversation = diskStorage({
   },
 });
 
-@Injectable()
-export class FileService {
-  private readonly logger = new Logger(FileService.name);
+@Controller('file-service')
+export class FileServiceController {
+  private readonly logger = new Logger(FileServiceController.name);
   private storage: typeof diskStorage;
   constructor() {
     this.logger.warn('FileService initialized');

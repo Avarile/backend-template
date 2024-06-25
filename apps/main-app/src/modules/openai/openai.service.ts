@@ -32,13 +32,10 @@ export class OpenAIService {
     //   model: 'whisper-1',
     //   response_format: 'text',
     // });
-
     // for await (const chunk of stream) {
     //   return chunk.text || '';
     // }
   }
 
-  async textToVoice(text: string) { }
-
-
+  // async textToVoice(text: string) { }
 }

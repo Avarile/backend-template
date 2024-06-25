@@ -1,5 +1,6 @@
 import { Column, Entity, Index } from 'typeorm';
 import { BaseEntity } from './base.entity';
+import { IUserEntity } from '../interface/user.interface';
 
 export interface IUserMetadata {
   avatar?: string;
@@ -18,10 +19,10 @@ export interface IAddress {
 
 @Index('user_email', ['email'], { unique: true })
 @Entity({ name: 'users' })
-export class UsersEntity extends BaseEntity {
+export class UsersEntity extends BaseEntity implements IUserEntity {
   @Column({
     type: 'varchar',
-    length: 200,
+    length: 100,
     nullable: false,
   })
   email: string;
@@ -34,56 +35,56 @@ export class UsersEntity extends BaseEntity {
 
   @Column({
     type: 'varchar',
-    length: 200,
+    length: 100,
     nullable: true,
   })
   email_verification_token?: string;
 
   @Column({
     type: 'varchar',
-    length: 200,
+    length: 50,
     nullable: true,
   })
   first_name: string;
 
   @Column({
     type: 'varchar',
-    length: 200,
+    length: 50,
     nullable: true,
   })
   last_name: string;
 
   @Column({
     type: 'varchar',
-    length: 200,
+    length: 50,
     nullable: true,
   })
   nick_name: string;
 
   @Column({
     type: 'varchar',
-    length: 200,
+    length: 50,
     nullable: false,
   })
   password: string;
 
   @Column({
     type: 'varchar',
-    length: 100,
+    length: 20,
     nullable: true,
   })
   postcode?: string;
 
   @Column({
     type: 'varchar',
-    length: 100,
+    length: 20,
     nullable: true,
   })
   mobile?: string;
 
   @Column({
     type: 'varchar',
-    length: 100,
+    length: 20,
     nullable: true,
   })
   title?: string;
@@ -91,29 +92,37 @@ export class UsersEntity extends BaseEntity {
   // 3rd party platform user fields
   @Column({
     type: 'varchar',
-    length: 200,
+    length: 50,
     nullable: true,
   })
   stripe_customer_id?: string;
 
   @Column({
     type: 'varchar',
-    length: 200,
+    length: 50,
     nullable: true,
   })
   stripe_session_id?: string;
 
   @Column({
-    type: 'json',
+    type: 'text',
     nullable: true,
+    transformer: {
+      to: (value: IUserMetadata) => JSON.stringify(value),
+      from: (value: string) => JSON.parse(value),
+    },
   })
-  metadata: IUserMetadata;
+  metadata?: IUserMetadata;
 
   @Column({
-    type: 'json',
+    type: 'text',
     nullable: true,
+    transformer: {
+      to: (value: IAddress) => JSON.stringify(value),
+      from: (value: string) => JSON.parse(value),
+    },
   })
-  address: IAddress;
+  address?: IAddress;
 
   @Column({
     type: 'simple-array',
@@ -136,4 +145,16 @@ export class UsersEntity extends BaseEntity {
     default: false,
   })
   is_suspended: boolean;
+
+  @Column({
+    type: 'text',
+    nullable: true,
+    transformer: {
+      to: (value: { confirmed: boolean }) => JSON.stringify(value),
+      from: (value: string) => JSON.parse(value),
+    },
+  })
+  test_data?: {
+    confirmed: boolean;
+  };
 }

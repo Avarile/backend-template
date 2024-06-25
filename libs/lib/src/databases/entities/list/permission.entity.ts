@@ -32,8 +32,13 @@ export class PermissionEntity extends BaseEntity {
   is_active: boolean;
 
   @Column({
-    type: 'json',
+    type: 'text',
     nullable: true,
+    transformer: {
+      to: (value: IPermissionMeta | null) => JSON.stringify(value),
+      from: (value: string): Promise<IPermissionMeta | null> =>
+        JSON.parse(value),
+    },
   })
-  meta: IPermissionMeta;
+  meta?: IPermissionMeta;
 }

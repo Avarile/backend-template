@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
-// import { OpenaiModule } from './openai/openai.module';
+import { CallCenterModule } from './call-center-ai/call-center.module';
+import { FileServiceModule } from './file-service/file-service.module';
+import { OpenaiModule } from './openai/openai.module';
 
 @Module({
-  // imports: [OpenaiModule],
+  imports: [CallCenterModule, FileServiceModule, OpenaiModule],
   controllers: [],
   providers: [],
 })

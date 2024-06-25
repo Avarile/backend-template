@@ -9,6 +9,7 @@ import { DatabaseModule } from '@app/lib/databases/databases.module';
 import appConfig from './utils/config/configurations';
 import { RedisClusterModule } from '@app/lib/redis/redis-cluster.module';
 import redisContant from '@app/lib/redis/redis.contant';
+import { InternalModule } from './modules/internal.module';
 // import { randomUUID } from 'crypto';
 
 @Module({
@@ -68,6 +69,8 @@ import redisContant from '@app/lib/redis/redis.contant';
       password: appConfig().DATABASES.DATABASE_MAIN_PASSWORD,
       database: appConfig().DATABASES.DATABASE_MAIN_DATABASE,
       synchronize: appConfig().NODE_ENV === 'development' ? true : false,
+      logger: 'debug',
+      logging: appConfig().NODE_ENV === 'development' ? true : false,
     }),
     RedisClusterModule.forRoot([
       {
@@ -85,6 +88,8 @@ import redisContant from '@app/lib/redis/redis.contant';
         db: appConfig().REDIS_CLUSTER.REDIS2_DB,
       },
     ]),
+
+    InternalModule,
   ],
 })
 export class MainAppModule {
@@ -94,11 +99,3 @@ export class MainAppModule {
     consumer.apply(LoggerMiddleware).forRoutes('*');
   }
 }
-
-// {
-//                 namespace: appConfig().REDIS1_NAMESPACE,
-//                 host: appConfig().REDIS1_HOST,
-//                 port: appConfig().REDIS1_PORT,
-//                 password: appConfig().REDIS1_PASSWORD,
-//                 db: appConfig().REDIS1_DB,
-// }
