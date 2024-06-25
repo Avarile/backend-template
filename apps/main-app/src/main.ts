@@ -55,5 +55,7 @@ async function bootstrap() {
   app.useGlobalFilters();
 
   app.listen(appConfig().PORT);
+
+  app.get(Logger).log(`Server running on ${appConfig().PORT}`);
 }
 bootstrap();

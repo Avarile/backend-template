@@ -1,21 +1,21 @@
 import { Body, Controller, Logger, Post } from '@nestjs/common';
 import { CustomService } from './custom.service';
-import { ConfirmAttendanceDTO } from '../dto/custom-tool.dto';
+import { ConfirmAttendanceDTO, RegisterUserDTO } from '../dto/custom-tool.dto';
 
 @Controller('custom-function')
 export class CustomFunctionController {
   private readonly logger = new Logger(CustomFunctionController.name);
   constructor(private readonly customToolService: CustomService) {}
 
-  // @Post('create-user')
-  // async createUserInfoAction(@Body() body: any): Promise<any> {
-  //   this.logger.log('Creating user info');
+  @Post('create-user')
+  async createUserInfoAction(@Body() body: RegisterUserDTO): Promise<any> {
+    this.logger.log('Creating user info');
 
-  //   const response = await this.customToolService.updateUserInfo(body);
+    const response = await this.customToolService.createUserInfo(body);
 
-  //   this.logger.log('User info created');
-  //   return response;
-  // }
+    this.logger.log('User info created');
+    return response;
+  }
 
   // @Post('update-user')
   // async updateUserInfoAction(@Body() body: any): Promise<any> {
