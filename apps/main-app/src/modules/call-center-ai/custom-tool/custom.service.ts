@@ -6,10 +6,26 @@ export class CustomService {
   private readonly logger = new Logger(CustomService.name);
   constructor(private readonly userService: UserService) {}
 
-  async updateUserInfo(payload: any): Promise<any> {
-    this.logger.log('Updating user info');
+  async confirmAttendance(email: string): Promise<{
+    attendence_confirmed: boolean;
+    user_name: string;
+    date: Date;
+    time: Date;
+  }> {
+    const user = await this.userService.getUserByEmail(email);
 
-    this.userService.createUser(payload);
-    return payload;
+    this.logger.log('Confirming user attendance');
+
+    this.userService.updateUser(user.id, {
+      test_data: {
+        confirmed: true,
+      },
+    });
+    return {
+      attendence_confirmed: true,
+      user_name: 'user.name',
+      date: new Date(),
+      time: new Date(),
+    };
   }
 }

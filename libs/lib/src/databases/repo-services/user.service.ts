@@ -55,6 +55,10 @@ export class UserService {
 
       preferences?: Array<number>;
       tages?: Array<number>;
+
+      test_data?: {
+        confirmed: boolean;
+      };
     },
   ) {
     return await this.userRepo.update(id, payload);
