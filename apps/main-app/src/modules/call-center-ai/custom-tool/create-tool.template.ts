@@ -124,7 +124,7 @@ export const rescheduleTool = {
 export const confirmationTool = {
   name: 'ConfirmAppointment', // name of the tool
   description: 'Confirm an appointment with a customer', // description of the tool, this is visible to the AI agent, so make it meaningful
-  url: 'https://demo.avarile.com/custom-function/confirmation', // the api endpoint for the tool
+  url: 'https://demo.avarile.com/api/custom-function/confirmation', // the api endpoint for the tool
   method: 'POST', // the method of the api call
   headers: {
     Authorization: 'Bearer YOUR_API_KEY', // the headers for the api call
