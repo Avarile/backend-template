@@ -4,6 +4,7 @@ import {
   IsEnum,
   IsOptional,
   ValidateNested,
+  IsEmail,
 } from 'class-validator';
 import { CallCenterIntentionEnum } from './call-center-send.interface';
 import { Type } from 'class-transformer';
@@ -16,6 +17,10 @@ export class CallContentDTO {
   @IsString()
   @IsOptional()
   date: string;
+
+  @IsString()
+  @IsOptional()
+  time: string;
 }
 
 export class CallCenterSendCallDTO {
@@ -24,6 +29,9 @@ export class CallCenterSendCallDTO {
 
   @IsString()
   user_last_name: string;
+
+  @IsEmail()
+  user_email: string;
 
   @ValidateNested()
   @Type(() => CallContentDTO)

@@ -131,7 +131,7 @@ export const confirmationTool = {
   },
   // the body of the api call, this is the payload AI agent will send to the API
   body: {
-    user_email: '{{input.email}}',
+    email: '{{input.email}}',
   },
   // The input schema is critical. It defines the shape of the API request, the different inputs the request can take, and also includes an example (which helps our system when creating requests).
   // input_schema is converted into the variable "{{input}}" that you can use in the request body/query/headers
@@ -139,13 +139,15 @@ export const confirmationTool = {
     // the example is a sample input that the AI agent can use to generate the request
     example: {
       speech:
-        'Got it - your position in our next Deal Mastery Event is secured.',
-      user_email: 'example@gmail.com',
+        'Got it - Please give me a moment to update your information in the system.',
+      email: 'example@gmail.com',
     },
     type: 'string',
     // the properties define the different inputs the request can take
     properties: {
-      user_email: 'string',
+      speech:
+        'Got it - Please allow me a moment to update your information in the system.',
+      email: 'string',
     },
   },
   // response from the API call, this is what the AI will use to generate the response to the user, the definition of the response should be easy to understand

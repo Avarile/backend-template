@@ -28,11 +28,22 @@ export class CallCenterController {
       switch (body.intention) {
         case CallCenterIntentionEnum.confirmation:
           payload = {
-            ...sendCallTemplate.confirmation,
+            ...sendCallTemplate({
+              user_name: body.user_last_name,
+              email: body.user_email,
+              date: body.content.date,
+              time: body.content.time,
+            }),
             phone_number: body.phone_number,
-            first_sentence: `Hello Mr.${body.user_last_name}, this is a confirmation call from Aaron Sansoni Group, My name is Shuana, I am calling to confirm your position for next ${body.content.context} event, time of the event will be ${body.content.date}, May I confirm your attandence?.`,
+            // first_sentence: `Hello Mr.${body.user_last_name}, this is a confirmation call from Aaron Sansoni Group, My name is Shuana, I am calling to confirm your position for next ${body.content.context}, time of the event will be ${body.content.date}, May I confirm your attandence?.`,
             // user_last_name: Doe, content: {context: 'Deal Mastery', date: 'June 1st at 10:00 AM'}, intention: 'confirmation'
             tools: [confirmationTool],
+            request_data: {
+              last_name: body.user_last_name,
+              client_email: body.user_email,
+              date: body.content.date,
+              time: body.content.time,
+            },
           };
           break;
 
