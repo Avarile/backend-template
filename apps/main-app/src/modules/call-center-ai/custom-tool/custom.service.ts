@@ -52,4 +52,14 @@ export class CustomService {
       time: new Date(),
     };
   }
+
+  async getCalendarInfo(): Promise<any> {
+    this.logger.log('Getting calendar info');
+
+    return {
+      empty1: 'July 7th, 2:00 PM',
+      empty2: 'July 8th, 10:00 AM',
+      empty3: 'July 14th, 10:00 AM',
+    };
+  }
 }

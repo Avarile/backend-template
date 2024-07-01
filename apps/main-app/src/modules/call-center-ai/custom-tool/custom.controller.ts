@@ -41,4 +41,14 @@ export class CustomFunctionController {
     this.logger.log('User info updated');
     return response;
   }
+
+  @Post('get-calendar')
+  async getCalendarAction(): Promise<any> {
+    this.logger.log('Getting calendar info');
+
+    const response = await this.customToolService.getCalendarInfo();
+
+    this.logger.log('Calendar info retrieved');
+    return response;
+  }
 }

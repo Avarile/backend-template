@@ -6,3 +6,6 @@ export * from './list/roleOnpermission.entity';
 export * from './list/useOnrole.entity';
 export * from './list/user-account.entity';
 export * from './list/openai-account.entity';
+export * from './list/information.entity';
+export * from './list/timetable.entity';
+export * from './list/tag.entity';

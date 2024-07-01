@@ -5,3 +5,5 @@ export * from './list/rolesOnpermission.repository';
 export * from './list/user-account.repository';
 export * from './list/userOnrole.repository';
 export * from './list/openAIAccount.repository';
+export * from './list/information.repository';
+export * from './list/timetable.repository';
